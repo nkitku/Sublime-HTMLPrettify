@@ -72,7 +72,8 @@ export const translateEditorConfigToJsbeautifyConfig = editorConfig => ({
     [globString, mapObj(globConfig, (prefName, prefValue) => {
       switch (prefName) {
         case 'indent_style':
-          return ['indent_char', sanitizeCharishValues(prefValue)];
+          let ch = sanitizeCharishValues(prefValue);
+					return ch=="\t"?['indent_with_tabs',true]:['indent_char',ch];
         case 'insert_final_newline':
           return ['end_with_newline', prefValue];
         default:
